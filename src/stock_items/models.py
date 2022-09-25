@@ -4,14 +4,15 @@ from app.models import DefaultModel
 
 
 # TODO: add logging for status change (status changed to ...)
+# TODO: amount logic referred to orders/repairs/selling
 class StockItem(DefaultModel):
     class STATUS(models.TextChoices):
-        NEW = 'Новое'
-        SHIPPING = 'Поставка'
-        IN_STOCK = 'На складе'
-        REPAIRING = 'Ремонтируется'
-        IN_STORE = 'На продаже'
-        ARCHIVE = 'Архив'
+        NEW = 'Новое', 'Новое'
+        SHIPPING = 'Поставка', 'Поставка'
+        IN_STOCK = 'На складе', 'На складе'
+        REPAIRING = 'Ремонтируется', 'Ремонтируется'
+        IN_STORE = 'На продаже', 'На продаже'
+        ARCHIVE = 'Архив', 'Архив'
         POST_SELLING_ISSUES = 'Проблемы после продажи'
 
     name = models.CharField('Наименование', max_length=128)
@@ -19,6 +20,9 @@ class StockItem(DefaultModel):
     model = models.ForeignKey('stock_items.ItemModel', verbose_name='Модель', on_delete=models.PROTECT)
     amount = models.PositiveIntegerField('Количество', help_text='>=1', validators=[MinValueValidator(1)])
     state = models.CharField('Статус', max_length=64, choices=STATUS.choices, default=STATUS.NEW)
+
+    def __str__(self) -> str:
+        return f'{self.name} #{self.id} | left: {self.amount} | state: {self.state}'
 
     class Meta:
         verbose_name = 'Вещь на складе'
@@ -54,6 +58,9 @@ class ItemModel(DefaultModel):
     name = models.CharField('Наименование', max_length=64)
     code = models.CharField('Код', max_length=64, help_text='Код модели. Обычно находится у штрих-кода')
     manufacturer = models.ForeignKey('stock_items.Manufacturer', verbose_name='Производитель', on_delete=models.PROTECT)
+
+    def __str__(self) -> str:
+        return f'{self.name} | {self.code}'
 
     class Meta:
         verbose_name = 'Модель'
@@ -92,7 +99,7 @@ class Warranty(DefaultModel):
     expiration_date = models.DateField('Срок истечения', null=True, blank=True)
     initial_months_length = models.PositiveIntegerField('Изначальный размер гарантии', help_text='>=1', validators=[MinValueValidator(1)], null=True, blank=True)
     store_warranty = models.BooleanField('Гарантия магазина')
-    description = models.TextField('Описание')
+    description = models.TextField('Описание', null=True, blank=True)
 
     def __str__(self) -> str:
         return f'#{self.stock_item.id} | {self.stock_item.name}'

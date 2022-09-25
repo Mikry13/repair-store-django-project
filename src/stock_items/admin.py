@@ -14,12 +14,13 @@ from stock_items.models import (
 
 @admin.register(StockItem)
 class StockItemAdmin(DefaultModelAdmin):
-    pass
+    search_fields = ['name']
+    list_filter = ['manufacturer', 'model']  # TODO: change model queryset by manufacturer
 
 
 @admin.register(Repairs)
 class RepairsAdmin(DefaultModelAdmin):
-    pass
+    search_fields = ['repairing_item__name', 'repair_item__name']
 
 
 @admin.register(Manufacturer)
@@ -29,12 +30,12 @@ class ManufacturerAdmin(DefaultModelAdmin):
 
 @admin.register(ItemModel)
 class ItemModelAdmin(DefaultModelAdmin):
-    pass
+    search_fields = ['name']
 
 
 @admin.register(UniqueIdentifier)
 class UniqueIdentifierAdmin(DefaultModelAdmin):
-    pass
+    search_fields = ['stock_item__name', 'value']
 
 
 @admin.register(UniqueIdentifierType)
@@ -42,6 +43,7 @@ class UniqueIdentifierTypeAdmin(DefaultModelAdmin):
     pass
 
 
+# TODO: add custom filter by 'expired'
 @admin.register(Warranty)
 class WarrantyAdmin(DefaultModelAdmin):
-    pass
+    search_fields = ['stock_item__name']

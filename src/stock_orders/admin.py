@@ -19,11 +19,34 @@ class SellerAdmin(DefaultModelAdmin):
     pass
 
 
+class StockOrderItemInline(admin.StackedInline):
+    model = StockOrderItem
+    extra = 0
+    readonly_fields = ['total_price']
+
+
 @admin.register(StockOrder)
 class StockOrderAdmin(DefaultModelAdmin):
-    pass
+    list_display = ['order_date', 'seller']
+    list_filter = ['seller']
+    inlines = [StockOrderItemInline]
 
 
 @admin.register(StockOrderItem)
 class StockOrderItemAdmin(DefaultModelAdmin):
-    pass
+    list_display = [
+        'id',
+        'stock_order',
+        'stock_item',
+        'amount',
+        'price',
+        'shipping_price',
+        'total_price',
+        'currency',
+    ]
+
+    readonly_fields = ['total_price']
+    fieldsets = (
+        (None, {'fields': ('stock_order', 'stock_item', 'amount')}),
+        ('Цены', {'fields': ('price', 'shipping_price', 'currency', 'total_price')}),
+    )

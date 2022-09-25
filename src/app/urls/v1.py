@@ -7,7 +7,7 @@ from django.urls import path
 app_name = 'api_v1'
 urlpatterns = [
     path('auth/', include('a12n.urls')),
-    path('users/', include('users.urls')),
+    # path('users/', include('users.urls')), , # TODO: add users (moderators/admins) app.
     path('docs/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema')),
 ]

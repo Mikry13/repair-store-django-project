@@ -16,7 +16,6 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
 }
 
-
 #
 # Security notice: we use plain bcrypt to store passwords.
 #

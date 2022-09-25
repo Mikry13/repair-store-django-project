@@ -2,13 +2,11 @@ from typing import Any
 
 from behaviors.behaviors import Timestamped  # type: ignore
 
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 __all__ = [
     'models',
     'DefaultModel',
-    'TimestampedModel',
 ]
 
 
@@ -57,16 +55,7 @@ class DefaultModel(models.Model):
         """
         pass
 
-    def save(self, *args, **kwargs) -> None:
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.update_calculated_fields()
         self.run_services()
-        super().save(*args, **kwargs)
-
-
-class TimestampedModel(DefaultModel, Timestamped):
-    """
-    Default app model that has `created` and `updated` attributes.
-    Currently based on https://github.com/audiolion/django-behaviors
-    """
-    class Meta:
-        abstract = True
+        super().save(force_insert=False, force_update=False, using=None, update_fields=None)

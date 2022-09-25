@@ -6,6 +6,10 @@ APPS = [
     'users',
 ]
 
+MODEL_APPS = [
+    'stock_items'
+]
+
 THIRD_PARTY_APPS = [
     'drf_spectacular',
     'drf_spectacular_sidecar',
@@ -23,4 +27,4 @@ THIRD_PARTY_APPS = [
     'django.contrib.staticfiles',
 ]
 
-INSTALLED_APPS = APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = APPS + MODEL_APPS + THIRD_PARTY_APPS

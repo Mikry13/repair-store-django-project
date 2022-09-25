@@ -1,5 +1,3 @@
-# Application definition
-
 APPS = [
     'app',
     'a12n',
@@ -7,7 +5,8 @@ APPS = [
 ]
 
 MODEL_APPS = [
-    'stock_items'
+    'stock_items',
+    'stock_orders',
 ]
 
 THIRD_PARTY_APPS = [

@@ -17,7 +17,7 @@ class StockItem(DefaultModel):
     name = models.CharField('Наименование', max_length=128)
     manufacturer = models.ForeignKey('stock_items.Manufacturer', verbose_name='Производитель', on_delete=models.PROTECT)
     model = models.ForeignKey('stock_items.ItemModel', verbose_name='Модель', on_delete=models.PROTECT)
-    amount = models.PositiveIntegerField('Количество', validators=[MinValueValidator(1)])
+    amount = models.PositiveIntegerField('Количество', help_text='>=1', validators=[MinValueValidator(1)])
     state = models.CharField('Статус', max_length=64, choices=STATUS.choices, default=STATUS.NEW)
 
     class Meta:
@@ -30,7 +30,7 @@ class StockItem(DefaultModel):
 class Repairs(DefaultModel):
     repairing_item = models.ForeignKey('stock_items.StockItem', related_name='repairs', on_delete=models.CASCADE)
     repair_item = models.ForeignKey('stock_items.StockItem', related_name='in_use_repairs', verbose_name='Запчасть', on_delete=models.PROTECT)
-    amount = models.PositiveIntegerField('Количество использованных запчастей', validators=[MinValueValidator(1)])
+    amount = models.PositiveIntegerField('Количество использованных запчастей', help_text='>=1', validators=[MinValueValidator(1)])
 
     def __str__(self) -> str:
         return f'#{self.repair_item.id} {self.repair_item.name}' \
@@ -90,7 +90,7 @@ class UniqueIdentifierType(DefaultModel):
 class Warranty(DefaultModel):
     stock_item = models.OneToOneField('stock_items.StockItem', verbose_name='Вещь на складе', on_delete=models.CASCADE)
     expiration_date = models.DateField('Срок истечения', null=True, blank=True)
-    initial_months_length = models.PositiveIntegerField('Изначальный размер гарантии', validators=[MinValueValidator(1)], null=True, blank=True)
+    initial_months_length = models.PositiveIntegerField('Изначальный размер гарантии', help_text='>=1', validators=[MinValueValidator(1)], null=True, blank=True)
     store_warranty = models.BooleanField('Гарантия магазина')
     description = models.TextField('Описание')
 

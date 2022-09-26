@@ -91,7 +91,8 @@ class BuyerOrder(DefaultModel):
         self.total_price = sum([order_item['total_price'] for order_item in order_items])  # NOTE: temporary solution
 
     def __str__(self) -> str:
-        return f'{self.buyer} | {self.order_date}'
+        return f'{"(доставлен)" if self.state == self.STATUS.SHIPPED else ""}' \
+               f'{self.buyer} | {self.order_date}'
 
     class Meta:
         verbose_name = 'Заказ покупателя'

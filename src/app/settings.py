@@ -30,3 +30,6 @@ include(
     'conf/templates.py',
     'conf/timezone.py',
 )
+
+import django_on_heroku
+django_on_heroku.settings(locals())

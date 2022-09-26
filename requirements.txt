@@ -16,3 +16,4 @@ django-healthchecks
 sentry-sdk
 Pillow
 psycopg2-binary
+django_on_heroku

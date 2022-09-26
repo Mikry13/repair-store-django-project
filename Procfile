@@ -1,2 +1,2 @@
 web: gunicorn --chdir ./src
-web: gunicorn app.wsgi
+web: gunicorn djangoProject.wsgi -b $PORT

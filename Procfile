@@ -1,2 +1,1 @@
-web: gunicorn --chdir ./src
-web: gunicorn djangoProject.wsgi -b $PORT
+web: gunicorn --pythonpath ./src/app app.wsgi --log-file -

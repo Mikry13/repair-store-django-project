@@ -15,4 +15,4 @@ django-split-settings
 django-healthchecks
 sentry-sdk
 Pillow
-psycopg2
+psycopg2-binary

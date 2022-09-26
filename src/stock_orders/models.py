@@ -50,7 +50,7 @@ class StockOrderItem(DefaultModel):
     amount = models.PositiveIntegerField('Количество', help_text='>=1', validators=[MinValueValidator(1)])
     price = models.FloatField('Цена за штуку')
     shipping_price = models.FloatField('Цена доставки', null=True, blank=True)
-    total_price = models.FloatField('Суммарная цена')
+    total_price = models.FloatField('Суммарная цена', editable=False)
 
     currency = models.CharField('Валюта', max_length=64, choices=Currency.choices, default=Currency.RUB)
 

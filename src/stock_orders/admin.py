@@ -27,7 +27,7 @@ class StockOrderItemInline(admin.StackedInline):
 
 @admin.register(StockOrder)
 class StockOrderAdmin(DefaultModelAdmin):
-    list_display = ['order_date', 'seller']
+    list_display = ['id', 'order_date', 'seller']
     list_filter = ['seller']
     inlines = [StockOrderItemInline]
 

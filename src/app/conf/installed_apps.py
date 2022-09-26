@@ -7,6 +7,7 @@ APPS = [
 MODEL_APPS = [
     'stock_items.apps.StockItemsConfig',
     'stock_orders.apps.StockOrdersConfig',
+    'sales.apps.SalesConfig',
 ]
 
 THIRD_PARTY_APPS = [

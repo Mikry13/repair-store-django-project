@@ -1,6 +1,7 @@
 # This file was generated using http://github.com/f213/django starter template.
 #
 # Settings are split into multiple files using http://github.com/sobolevn/django-split-settings
+import os
 
 from split_settings.tools import include
 
@@ -31,5 +32,8 @@ include(
     'conf/timezone.py',
 )
 
-import django_on_heroku
-django_on_heroku.settings(locals())
+match os.environ.get('HOST'):
+    case 'HEROKU':
+        import django_on_heroku
+
+        django_on_heroku.settings(locals())

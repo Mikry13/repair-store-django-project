@@ -1,4 +1,4 @@
-FROM python:3.9.9-slim-buster
+FROM python:3.10.7-slim-buster
 ENV PYTHONBUFFERED=1
 WORKDIR /django
 COPY requirements.txt requirements.txt

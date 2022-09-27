@@ -1,5 +1,3 @@
-# Django project
-
 ## Project structure
 
 The main django app is called `app`. It contains `.env` file for django-environ. For examples see `src/app/.env.ci`. 
@@ -18,14 +16,27 @@ $ pip install -r requirements.txt
 Run the server:
 
 ```bash
-$ cd src && cp app/.env.ci app/.env  # default environment variables
+$ cd src && cp app/.env.ci app/.env  # setup environment variables
 $ docker-compose build
 $ docker-compose up
+```
+
+#### Additions
+You can also run django separately from database on your local machine 
+if you build container with `postgres-docker-compose.yml` and set `.env > DATABASE_URL > "db"` to `localhost`
+
+Then running will be like:
+```bash
+$ docker-compose -f postgres-docker-compose.yml
+$ docker-compose build
+$ docker-compose up
+$ cd src && python manage.py migrate && python manage.py createsuperuser && python manage.py runserver
 ```
 
 ### Note
 * To run server on `Heroku`, set environment variable `HOST=HEROKU`.
 * If you change environment variables, re-build container.
+* _**Do not forget to specify default superuser in env**_
 
 ## Backend Code requirements
 

@@ -15,7 +15,6 @@ BASE_FIELDSETS = (
                     'email',
                     'phone',
                     'position',
-                    'rank',
                 ),
         },
     ),

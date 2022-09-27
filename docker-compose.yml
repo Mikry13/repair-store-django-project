@@ -11,6 +11,8 @@ services:
     container_name: django_container
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
+      - create_superuser
+      - migrate
       - db
     networks:
       - network
@@ -29,7 +31,29 @@ services:
     command: --autovacuum=off --fsync=off --synchronous_commit=off --full_page_writes=off --work_mem=12MB --max-connections=10 --max_wal_senders=0
     networks:
       - network
+  migrate:
+    image: app:django
+    command: python manage.py migrate
+    volumes:
+      - ./src:/django
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      - network
 
+  create_superuser:
+    image: app:django
+    command: python manage.py createsuperuser --noinput
+    volumes:
+      - ./src:/django
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      - network
 networks:
   network:
     driver: bridge

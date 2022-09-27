@@ -6,7 +6,7 @@ from app.models import DefaultModel
 
 class StoreItemMarketplace(DefaultModel):
     name = models.CharField('Наименование', max_length=64)
-    contacts = models.TextField('Контактные данные', help_text='site, or address')
+    contacts = models.TextField('Контактные данные', help_text='site, or address', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Торговая площадка'

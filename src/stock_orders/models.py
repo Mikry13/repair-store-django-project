@@ -46,10 +46,11 @@ class StockOrderItem(DefaultModel):
 
     stock_order = models.ForeignKey('stock_orders.StockOrder', verbose_name='Закупка', on_delete=models.CASCADE)
     stock_item = models.ForeignKey('stock_items.StockItem', verbose_name='Вещь на складе', on_delete=models.PROTECT)
+    shipment_date = models.DateTimeField('Дата доставки', null=True, blank=True)
 
     amount = models.PositiveIntegerField('Количество', help_text='>=1', validators=[MinValueValidator(1)])
     price = models.FloatField('Цена за штуку')
-    shipping_price = models.FloatField('Цена доставки', null=True, blank=True)
+    shipment_price = models.FloatField('Цена доставки', null=True, blank=True)
     total_price = models.FloatField('Суммарная цена', editable=False)
 
     currency = models.CharField('Валюта', max_length=64, choices=Currency.choices, default=Currency.RUB)

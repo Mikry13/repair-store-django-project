@@ -72,6 +72,7 @@ class UniqueIdentifierAdmin(DefaultModelAdmin):
         'identifier_type',
     ]
     autocomplete_fields = [
+        'stock_item',
         'identifier_type',
     ]
 

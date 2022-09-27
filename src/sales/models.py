@@ -42,10 +42,6 @@ class StoreOrderItem(DefaultModel):
     currency = models.CharField('Валюта', max_length=64, choices=StoreItem.Currency.choices, default=StoreItem.Currency.RUB, null=True, editable=False)
     total_price = models.FloatField('Суммарная цена', editable=False, null=True)
 
-    def calculate_amount(self) -> None:
-        if self.amount > self.store_item.stock_item.amount:
-            self.amount = self.store_item.stock_item.amount
-
     def calculate_price(self) -> None:
         if not self.price:
             self.price = self.store_item.price

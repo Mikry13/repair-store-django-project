@@ -61,9 +61,10 @@ class StockOrderItemAdmin(DefaultModelAdmin):
         'id',
         'stock_order',
         'stock_item',
+        'shipment_date',
         'amount',
         'price',
-        'shipping_price',
+        'shipment_price',
         'total_price',
         'currency',
     ]
@@ -77,6 +78,6 @@ class StockOrderItemAdmin(DefaultModelAdmin):
     ]
 
     fieldsets = (
-        (None, {'fields': ('stock_order', 'stock_item', 'amount')}),
-        ('Цены', {'fields': ('price', 'shipping_price', 'currency', 'total_price')}),
+        (None, {'fields': ('stock_order', 'stock_item', 'shipment_date', 'amount')}),
+        ('Цены', {'fields': ('price', 'shipment_price', 'currency', 'total_price')}),
     )

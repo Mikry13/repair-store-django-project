@@ -9,9 +9,13 @@ from logs.models import (
 
 @admin.register(BuyerOrderLog)
 class BuyerOrderLogAdmin(DefaultModelAdmin):
-    pass
+    autocomplete_fields = [
+        'buyer_order',
+    ]
 
 
 @admin.register(StockItemLog)
 class StockItemLogAdmin(DefaultModelAdmin):
-    pass
+    autocomplete_fields = [
+        'stock_item',
+    ]

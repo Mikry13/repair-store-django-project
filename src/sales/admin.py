@@ -17,7 +17,9 @@ class StoreItemMarketplaceAdmin(DefaultModelAdmin):
         'name',
         'contacts',
     ]
-    search_fields = ['name']
+    search_fields = [
+        'name',
+    ]
 
 
 @admin.register(StoreItem)
@@ -29,8 +31,16 @@ class StoreItemAdmin(DefaultModelAdmin):
         'currency',
         'marketplace',
     ]
-    search_fields = ['stock_item__name']
-    list_filter = ['marketplace']
+    search_fields = [
+        'stock_item__name',
+    ]
+    list_filter = [
+        'marketplace',  # TODO: add custom filter gte lte price/currency
+    ]
+    autocomplete_fields = [
+        'stock_item',
+        'marketplace',
+    ]
 
 
 @admin.register(StoreOrderItem)
@@ -50,11 +60,16 @@ class StoreOrderItemAdmin(DefaultModelAdmin):
         'total_price',
     ]
 
-    list_filter = ['store_item']
-
     search_fields = [
         'buyer_order__buyer__name',
         'store_item__stock_item__name',
+    ]
+    list_filter = [
+        'store_item',
+    ]
+    autocomplete_fields = [
+        'buyer_order',
+        'store_item',
     ]
 
     fieldsets = (
@@ -80,11 +95,16 @@ class BuyerOrderInline(admin.StackedInline):
         'total_price',
     ]
 
-    list_filter = ['store_item']
-
     search_fields = [
         'buyer_order__buyer__name',
         'store_item__stock_item__name',
+    ]
+    list_filter = [
+        'store_item',
+    ]
+    autocomplete_fields = [
+        'buyer_order',
+        'store_item',
     ]
 
 
@@ -100,10 +120,24 @@ class BuyerOrderAdmin(DefaultModelAdmin):
         'currency',
         'total_price',
     ]
-
-    readonly_fields = ['total_price']
+    readonly_fields = [
+        'total_price',
+    ]
+    search_fields = [
+        'buyer__first_name',
+        'buyer__middle_name',
+        'buyer__last_name',
+        'buyer__contacts',
+        'order_date',
+        'ship_date',
+    ]
+    list_filter = [
+        'buyer',
+    ]
+    autocomplete_fields = [
+        'buyer',
+    ]
     inlines = [BuyerOrderInline]
-    list_filter = ['buyer']
 
     # TODO: gte lte by date.
     # TODO: search widget for filter values (can be too much lines)

@@ -11,24 +11,47 @@ from stock_orders.models import (
 
 @admin.register(SellerMarketplace)
 class SellerMarketplaceAdmin(DefaultModelAdmin):
-    pass
+    search_fields = [
+        'name',
+    ]
 
 
 @admin.register(Seller)
 class SellerAdmin(DefaultModelAdmin):
-    pass
+    search_fields = [
+        'name',
+        'marketplace__name',
+    ]
+    autocomplete_fields = [
+        'marketplace'
+    ]
 
 
 class StockOrderItemInline(admin.StackedInline):
     model = StockOrderItem
     extra = 0
-    readonly_fields = ['total_price']
+    readonly_fields = [
+        'total_price',
+    ]
 
 
 @admin.register(StockOrder)
 class StockOrderAdmin(DefaultModelAdmin):
-    list_display = ['id', 'order_date', 'seller']
-    list_filter = ['seller']
+    list_display = [
+        'id',
+        'order_date',
+        'seller',
+    ]
+    search_fields = [
+        'order_date',
+        'seller__name',
+    ]
+    list_filter = [
+        'seller',
+    ]
+    autocomplete_fields = [
+        'seller',
+    ]
     inlines = [StockOrderItemInline]
 
 
@@ -45,7 +68,14 @@ class StockOrderItemAdmin(DefaultModelAdmin):
         'currency',
     ]
 
-    readonly_fields = ['total_price']
+    readonly_fields = [
+        'total_price',
+    ]
+    autocomplete_fields = [
+        'stock_order',
+        'stock_item',
+    ]
+
     fieldsets = (
         (None, {'fields': ('stock_order', 'stock_item', 'amount')}),
         ('Цены', {'fields': ('price', 'shipping_price', 'currency', 'total_price')}),

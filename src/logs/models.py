@@ -21,7 +21,7 @@ class BuyerOrderLog(DefaultLog):
 
 
 class StockItemLog(DefaultLog):
-    buyer_order = models.ForeignKey('stock_items.StockItem', verbose_name='Вещь на складе', on_delete=models.CASCADE)
+    stock_item = models.ForeignKey('stock_items.StockItem', verbose_name='Вещь на складе', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'История вещи на складе'

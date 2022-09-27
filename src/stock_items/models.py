@@ -19,7 +19,7 @@ class StockItem(DefaultModel):
     name = models.CharField('Наименование', max_length=128)
     manufacturer = models.ForeignKey('stock_items.Manufacturer', verbose_name='Производитель', on_delete=models.PROTECT)
     model = models.ForeignKey('stock_items.ItemModel', verbose_name='Модель', on_delete=models.PROTECT)
-    amount = models.PositiveIntegerField('Количество', help_text='>=1', validators=[MinValueValidator(1)])
+    amount = models.PositiveIntegerField('Количество')
     state = models.CharField('Статус', max_length=64, choices=STATUS.choices, default=STATUS.NEW)
 
     def __str__(self) -> str:

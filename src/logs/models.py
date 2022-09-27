@@ -5,7 +5,7 @@ from app.models import DefaultModel
 
 class DefaultLog(DefaultModel):
     event = models.CharField('Событие', max_length=128)
-    description = models.TextField('Описание')
+    description = models.TextField('Описание', null=True, blank=True)
     timestamp = models.DateTimeField('timestamp')
 
     class Meta:

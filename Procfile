@@ -1,1 +1,1 @@
-web: cd src; gunicorn app.wsgi
+web: cd src; python manage.py migrate; python manage.py createsuperuser --noinput; gunicorn app.wsgi

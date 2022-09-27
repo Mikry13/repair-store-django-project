@@ -56,7 +56,7 @@ class Manufacturer(DefaultModel):
 
 class ItemModel(DefaultModel):
     name = models.CharField('Наименование', max_length=64)
-    code = models.CharField('Код', max_length=64, help_text='Код модели. Обычно находится у штрих-кода')
+    code = models.CharField('Код', max_length=64, help_text='Код модели. Обычно находится у штрих-кода', null=True, blank=True)
     manufacturer = models.ForeignKey('stock_items.Manufacturer', verbose_name='Производитель', on_delete=models.PROTECT)
     notes = models.TextField('Заметки', null=True, blank=True)
 

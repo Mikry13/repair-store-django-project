@@ -56,7 +56,7 @@ class StockOrderItem(DefaultModel):
     currency = models.CharField('Валюта', max_length=64, choices=Currency.choices, default=Currency.RUB)
 
     def calculate_total_price(self):
-        self.total_price = self.price * self.amount + (self.shipping_price if self.shipping_price else 0.0)
+        self.total_price = self.price * self.amount + (self.shipment_price if self.shipment_price else 0.0)
 
     def __str__(self) -> str:
         return f'{self.stock_order} | {self.stock_item}'

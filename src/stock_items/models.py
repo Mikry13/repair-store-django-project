@@ -13,7 +13,8 @@ class StockItem(DefaultModel):
         REPAIRING = 'Ремонтируется', 'Ремонтируется'
         IN_STORE = 'На продаже', 'На продаже'
         ARCHIVE = 'Архив', 'Архив'
-        POST_SELLING_ISSUES = 'Проблемы после продажи'
+        POST_SELLING_ISSUES = 'Проблемы после продажи', 'Проблемы после продажи'
+        DIAGNOSE = 'Диагностируется', 'Диагностируется'
 
     name = models.CharField('Наименование', max_length=128)
     manufacturer = models.ForeignKey('stock_items.Manufacturer', verbose_name='Производитель', on_delete=models.PROTECT)

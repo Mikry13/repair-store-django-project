@@ -2,6 +2,9 @@ APPS = [
     # Default models, env, settings etc.
     'app',
 
+    # General purpose app
+    'general',
+
     # Token etc. config app.
     'a12n',
 

@@ -34,7 +34,8 @@ THIRD_PARTY_APPS = [
     'axes',
 
     # Django
-    'django.contrib.admin',
+    # 'django.contrib.admin',
+    'general.apps',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

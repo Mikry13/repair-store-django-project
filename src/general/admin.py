@@ -5,6 +5,9 @@ from general.api.viewsets import get_database_info
 
 
 class MyAdminSite(admin.AdminSite):
+    site_title = 'OldBox Repair/Shop'
+    site_header = 'OldBox Repair/Shop admin'
+
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [

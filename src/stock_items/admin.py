@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from app.admin import DefaultModelAdmin
+from stock_items.admin_filters import StockItemModelByManufacturer, StockItemByOrder
 from stock_items.models import (
     StockItem,
     Repairs,
@@ -21,7 +22,9 @@ class StockItemAdmin(DefaultModelAdmin):
     ]
     list_filter = [
         'manufacturer',
-        'model',
+        # 'model',
+        StockItemModelByManufacturer,
+        StockItemByOrder,
     ]  # TODO: change model queryset by manufacturer
     autocomplete_fields = [
         'manufacturer',

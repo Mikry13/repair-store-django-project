@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
-from rest_framework.response import Response
 
 APPS_NOT_INCLUDE = [
     'django',
@@ -36,14 +35,11 @@ def get_database_info(request: Request) -> HttpResponse:
             labels.append(_label)
             counts.append(_count)
 
-    ax.set_ylim(-1, len(counts) + 0.1)
-    ax.set_xlim(0, max(counts) + max(counts))
-
-    bars = ax.barh(range(len(counts)), counts, color='orange')
-
-    ax.bar_label(container=bars, labels=[f'| {counts[i]} | {labels[i]}' for i in range(len(counts))])
+    bars = ax.barh(labels, counts, color='orange')
+    ax.bar_label(container=bars, labels=[f'| {counts[i]}' for i in range(len(counts))])
     ax.set(xlabel='Количество записей', title='Статистика записей БД')
-    ax.set_yticklabels([])
+
+    ax.set_xlim(0, max(counts) + max(counts) * 0.15)
     fig.tight_layout()
 
     response = HttpResponse(content_type='image/png')

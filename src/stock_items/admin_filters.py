@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from stock_items.models import StockItem
 from stock_orders.models import StockOrder
 
 
@@ -53,13 +52,3 @@ class StockItemByOrder(admin.SimpleListFilter):
 
         elif self.value():
             return queryset
-
-
-class StockItemByStockOrderBySeller(admin.SimpleListFilter):
-    title = 'Продавец'
-    parameter_name = 'seller__id__exact'
-
-    def lookups(self, request, model_admin):
-        return None
-    def queryset(self, request, queryset):
-        return queryset

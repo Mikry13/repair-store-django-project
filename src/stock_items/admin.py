@@ -22,10 +22,9 @@ class StockItemAdmin(DefaultModelAdmin):
     ]
     list_filter = [
         'manufacturer',
-        # 'model',
         StockItemModelByManufacturer,
         StockItemByOrder,
-    ]  # TODO: change model queryset by manufacturer
+    ]
     autocomplete_fields = [
         'manufacturer',
         'model',

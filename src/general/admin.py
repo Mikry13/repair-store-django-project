@@ -19,7 +19,7 @@ class MyAdminSite(admin.AdminSite):
         app_list = super().get_app_list(request)
         app_list += [
             {
-                "name": 'Статистика записей в базе данных',
+                "name": 'Количество экземпляров по сущностям БД',
                 "app_label": "my_test_app",
                 "app_url": "stats",
                 "models": [

@@ -21,7 +21,7 @@ APPS_NOT_INCLUDE = [
 
 
 @api_view(['GET'])
-def get_database_info(request: Request) -> Response:
+def get_database_info(request: Request) -> HttpResponse:
     fig, ax = plt.subplots()
 
     labels = []
@@ -44,11 +44,8 @@ def get_database_info(request: Request) -> Response:
     ax.bar_label(container=bars, labels=[f'| {counts[i]} | {labels[i]}' for i in range(len(counts))])
     ax.set(xlabel='Количество записей', title='Статистика записей БД')
     ax.set_yticklabels([])
-    ax.set_xticklabels(range(len(counts)))
     fig.tight_layout()
 
     response = HttpResponse(content_type='image/png')
-    canvas = FigureCanvasAgg(fig)
-    canvas.print_png(response)
-
+    FigureCanvasAgg(fig).print_png(response)
     return response

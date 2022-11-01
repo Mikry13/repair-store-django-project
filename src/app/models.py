@@ -1,7 +1,5 @@
 from typing import Any
 
-from behaviors.behaviors import Timestamped  # type: ignore
-
 from django.db import models
 
 __all__ = [

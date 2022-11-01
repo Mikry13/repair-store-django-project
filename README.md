@@ -5,15 +5,18 @@ The main django app is called `app`. It contains `.env` file for django-environ.
 Also in the `app` are app-wide customizations like default models, admin classes etc. All the configurations are in `app/conf`
 
 ## Installing on a local machine
-* The project requires `Python 3.10.7`
+* The project requires `Python 3.10+`
+- **On Windows** you might want to install [PostgreSQL x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+After installing, add `bin` folder from `installation path` _(a.e. `C:/Program Files/PostgreSQL/15/bin`)_ to `PATH`
+- **On Linux** you might want to install [C API for PostgreSQL](https://pypi.org/project/libpq-dev/)```$ sudo apt install libpq-dev```
 
-Install requirements:
+### Install requirements:
 
 ```bash
 $ pip install -r requirements.txt
 ```
 
-Run the server:
+### Run the server:
 
 ```bash
 $ cd src && cp app/.env.ci app/.env  # setup environment variables
